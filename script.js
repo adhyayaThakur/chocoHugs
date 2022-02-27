@@ -2,8 +2,8 @@ require('./models/mongodb');
 
 //Import the necessary packages
 const express = require('express');
-var app = express();
-var cors = require('cors')
+let app = express();
+let cors = require('cors')
 const path = require('path');
 const exphb = require('express-handlebars');
 const bodyparser = require('body-parser');

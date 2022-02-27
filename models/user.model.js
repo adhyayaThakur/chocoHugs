@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 //Attributes of the Course object
-var userSchema = new mongoose.Schema({
+let userSchema = new mongoose.Schema({
     emailAddress: {
         type: String,
     },

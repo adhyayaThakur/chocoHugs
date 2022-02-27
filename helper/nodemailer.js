@@ -1,6 +1,6 @@
-var nodemailer = require('nodemailer');
+let nodemailer = require('nodemailer');
 
-var transporter = nodemailer.createTransport({
+let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'adhyayathakur@gmail.com',
@@ -9,7 +9,7 @@ var transporter = nodemailer.createTransport({
 });
 
 const sendMail = (to, subject, text) => {
-    var mailOptions = {
+    let mailOptions = {
         from: 'adhyayathakur240499@gmail.com',
         to,
         subject,

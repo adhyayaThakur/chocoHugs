@@ -1,9 +1,9 @@
-var express = require('express');
+let express = require('express');
 const mongoose = require('mongoose');
-var keys = require('../constants/constants')
+let keys = require('../constants/constants')
 
-var router = express.Router();
-const sendMail = require('../helper/nodemaler')
+let router = express.Router();
+const sendMail = require('../helper/nodemailer')
 
 const User = mongoose.model('User');
 
