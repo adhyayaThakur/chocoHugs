@@ -51,7 +51,11 @@ function insertUserIntoDatabase(req, res) {
         } else {
             user.save((err, doc) => {
                 if (!err) {
-                    sendMail(emailAddress, 'You are looged In', signUpText(emailAddress));
+                    sendMail({
+                        to: emailAddress,
+                        subject: 'You are looged In',
+                        html: ``
+                    });
                     res.status(200).send('Username and password saved')
                 } else {
                     res.status(500).send('Error occured')

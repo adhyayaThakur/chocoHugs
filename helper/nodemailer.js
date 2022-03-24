@@ -8,12 +8,13 @@ let transporter = nodemailer.createTransport({
     }
 });
 
-const sendMail = (to, subject, text) => {
+const sendMail = ({ to, subject, text, html }) => {
     let mailOptions = {
         from: 'adhyayathakur240499@gmail.com',
         to,
         subject,
-        text
+        text,
+        html,
     };
 
     transporter.sendMail(mailOptions, function(error, info) {
