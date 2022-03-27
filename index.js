@@ -1,4 +1,4 @@
-require('./models/mongodb');
+require('./mongodb/mongodb');
 
 //Import the necessary packages
 const express = require('express');

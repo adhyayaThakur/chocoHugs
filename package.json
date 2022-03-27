@@ -4,27 +4,24 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "start": "nodemon index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
-        "type": "git",
-        "url": "git+https://github.com/adhyayaThakur/chocoHuga.git"
+        "type": "git"
     },
     "author": "",
     "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/adhyayaThakur/chocoHuga/issues"
-    },
-    "homepage": "https://github.com/adhyayaThakur/chocoHuga#readme",
+
     "dependencies": {
         "body-parser": "1.19.2",
-        "cors": "^2.8.5",
+        "cors": "2.8.5",
         "express": "4.17.3",
         "express-handlebars": "6.0.2",
         "mongoose": "6.2.3",
-        "nodemailer": "^6.7.2",
-        "nodemon": "^2.0.15",
+        "nodemailer": "6.7.2",
+        "nodemon": "2.0.15",
         "npm": "8.5.1",
-        "springedge": "^1.0.6"
+        "springedge": "1.0.6"
     }
 }
