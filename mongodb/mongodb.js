@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/chocoHugs', { useNewUrlParser: true }, (err) => {
+mongoose.connect("mongodb+srv://adhyaya:btsblackpinktwice@cluster0.ye18h.mongodb.net/webseries?retryWrites=true&w=majority"
+, { useNewUrlParser: true }, (err) => {
     if (!err) {
         console.log('Successfully Established Connection with MongoDB')
     } else {
@@ -9,5 +10,5 @@ mongoose.connect('mongodb://localhost:27017/chocoHugs', { useNewUrlParser: true 
 });
 
 //Connecting Node and MongoDB
-require('./user.model')
-require('./course.model');
+require('../models/user.model')
+require('../models/course.model');
