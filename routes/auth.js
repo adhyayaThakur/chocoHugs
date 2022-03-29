@@ -75,7 +75,11 @@ function signIn(req, res) {
                 if (user.isActive) {
                     res.status(200).send('User login')
                 } else {
-                    sendMail(emailAddress, 'You are looged In', signUpText(emailAddress));
+                    sendMail({
+                        to: emailAddress,
+                        subject: 'You are looged In',
+                        html: signUpText(emailAddress)
+                    });
                     res.status(200).send('email not active')
                 }
             } else {
