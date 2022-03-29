@@ -54,10 +54,10 @@ function insertUserIntoDatabase(req, res) {
                     sendMail({
                         to: emailAddress,
                         subject: 'You are looged In',
-                        html: ``
+                        html: signUpText(emailAddress)
                     });
                     res.status(200).send('Username and password saved')
-                } else {
+                } else {                    
                     res.status(500).send('Error occured')
                 }
             })
@@ -89,9 +89,14 @@ function signIn(req, res) {
 
 function activateUser(req, res) {
     const { emailAddress } = req.query;
-    User.updateOne({ emailAddress }, { emailAddress, isActive: true }).then(() => {
-        res.send('is active')
-    })
+    User.updateOne({ emailAddress }, { emailAddress, isActive: true }).then((data) => {
+        const {matchedCount} = data;
+        if(matchedCount){
+            res.send('is active')
+        }else{
+            res.send('email address does not exist')
+        }
+    }).catch(err=>console.log(err))
 }
 
 //export this router to use in our index.js
