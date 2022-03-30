@@ -96,9 +96,9 @@ function activateUser(req, res) {
     User.updateOne({ emailAddress }, { emailAddress, isActive: true }).then((data) => {
         const {matchedCount} = data;
         if(matchedCount){
-            res.send('is active')
+            res.status(200).send('is active')
         }else{
-            res.send('email address does not exist')
+            res.status(400).send('email address does not exist')
         }
     }).catch(err=>console.log(err))
 }

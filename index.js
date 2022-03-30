@@ -10,10 +10,9 @@ const bodyparser = require('body-parser');
 
 const courseController = require('./controllers/courseController');
 const authController = require('./routes/auth')
+const schoolAdminProfileController = require('./routes/schoolAdminProfile')
 
-// app.use(bodyparser.urlencoded({
-//     extended: true
-// }));
+
 app.use(bodyparser.urlencoded({ extended: false }))
 app.use(bodyparser.json());
 
@@ -39,3 +38,4 @@ app.listen(port, () => console.log(`Listening on port ${port}..`));
 //Set the Controller path which will be responding the user actions
 app.use('/auth', authController)
 app.use('/course', courseController);
+app.use('/schoolAdmin',schoolAdminProfileController)

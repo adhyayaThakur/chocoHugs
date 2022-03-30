@@ -12,3 +12,4 @@ mongoose.connect("mongodb+srv://adhyaya:btsblackpinktwice@cluster0.ye18h.mongodb
 //Connecting Node and MongoDB
 require('../models/user.model')
 require('../models/course.model');
+require('../models/schoolAdminProfile.model')
