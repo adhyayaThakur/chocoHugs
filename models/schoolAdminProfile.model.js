@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 
 //Attributes of the Course object
-let userSchema = new mongoose.Schema({
+let schoolAdminProfileSchema = new mongoose.Schema({
     emailAddress: {
         type: String,
+        unique:true,
     },
     mobileNumber: {
         type: String,
+        unique:true,
     },
     password: {
         type: String,
@@ -16,14 +18,16 @@ let userSchema = new mongoose.Schema({
         enum: [false, true],
         default: false
     },
-    confirmationCode: {
+    schoolName:{
         type: String,
     },
-    role:{
+    address:{
         type: String,
-        enum:['schoolSuperAdmin','admin','teacher','student','parent'],
-        default: 'student'
+    },
+    schoolCode:{
+        type:String,
+        unique: true,
     }
 });
 
-mongoose.model('User', userSchema, 'user');
+mongoose.model('SchoolAdmin', schoolAdminProfileSchema, 'schoolAdminProfile');
