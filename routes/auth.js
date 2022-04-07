@@ -36,6 +36,42 @@ router.get('/emailActive', function(req, res) {
   activateUser(req, res);
 });
 
+router.post('/changePassword',function(req,res){
+  const {emailAddress}=req.body;
+
+  if(!emailAddress){
+    res.status(400).send('Email address is not provided');
+  }
+  changePassword(req,res);
+})
+
+function changePassword(req,res){
+
+  const {emailAddress,newPassword,oldPassword}=req.body;
+
+  User.find({emailAddress}).then((userList)=>{
+      const [user]=userList;
+      if(user.password!==oldPassword){
+        res.status(400).send('password incorrect');
+      }else if(oldPassword===newPassword){
+        res.status(400).send(JSON.stringify({
+          success: false,
+          message:'Old password is equal to new password'
+        }))
+      }else{
+        User.updateOne({emailAddress},{emailAddress,password: newPassword}).then((response)=>{
+            const {modifiedCount}= response;
+            if(modifiedCount===1){
+              res.status(200).send(JSON.stringify({
+                success: true,
+                message: 'Password changed!'
+              }))
+            }
+        })
+      }
+  })
+}
+
 
 function insertUserIntoDatabase(req, res) {
   const user = new User();
