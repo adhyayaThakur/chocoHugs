@@ -9,9 +9,6 @@ const path = require('path');
 const exphb = require('express-handlebars');
 const bodyparser = require('body-parser');
 
-const __dirname = path.resolve();
-
-
 const courseController = require('./controllers/courseController');
 const authController = require('./routes/auth');
 const schoolAdminProfileController = require('./routes/schoolAdminProfile');

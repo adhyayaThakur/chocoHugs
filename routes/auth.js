@@ -10,6 +10,8 @@ const User = mongoose.model('User');
 
 const signUpText = (emailAddress) => `http://localhost:8080/auth/emailActive?emailAddress=${emailAddress}`;
 
+const forgotPasswordText =(emailAddress)=>`http://localhost:8080/auth/forgotPassword?emailAddress=${emailAddress}`;
+
 router.post('/signin', function(req, res) {
   const {emailAddress, mobileNumber, password} = req.body;
   if (!emailAddress && !mobileNumber) {
@@ -36,6 +38,84 @@ router.get('/emailActive', function(req, res) {
   activateUser(req, res);
 });
 
+router.post('/forgotPasswordEmailActivation',function(req,res){
+  const {emailAddress}=req.body;
+  if(emailAddress){
+    forgotPasswordEmailActivation(req,res);
+  }else{
+    res.status(400).send(JSON.stringify({
+      success: false,
+      message : 'Email Address not provided.'
+    }))
+  }
+})
+
+router.post('/forgotPassword',function(req,res){
+  const {emailAddress,password}=req.body;
+
+  if(password && emailAddress){
+    forgotPassword(req,res)
+  }else{
+    res.status(400).send({
+      success:false,
+      message: 'Credentials are not provided'
+    })
+  }
+})
+
+function forgotPassword(req,res){
+  const {emailAddress,password}=req.body;
+
+    User.find({emailAddress}).then((users)=>{
+      if(users.length===1){
+        User.updateOne({emailAddress},{emailAddress,password}).then(()=>{
+          res.status(200).send(JSON.stringify({
+            success:true,
+            message :'Password updated successfully',
+          }))
+        }).catch(()=>{
+          res.status(500).send(JSON.stringify({
+            success: false,
+            message : 'Error! Contanct differentiation'
+          }))
+        })
+      }else{
+        res.status(500).send(JSON.stringify({
+          success: false,
+          message : 'Error! Contanct differentiation'
+        }))
+      }
+    })
+}
+
+function forgotPasswordEmailActivation(req,res){
+  const {emailAddress}=req.body;
+
+  User.find({emailAddress}).then((user)=>{
+      if(user.length==1){
+        sendMail({
+          to: emailAddress,
+          subject: 'Forgot Password',
+          text : forgotPasswordText(emailAddress)
+        })
+        res.status(200).send(JSON.stringify({
+          success: true,
+          message: 'Verification mail sent',
+        }))
+      }else{
+        res.status(400).send(JSON.stringify({
+          success:false,
+          message: 'User does not exist!'
+        }))
+      }
+
+  }).catch(()=>{
+    res.status(500).send(JSON.stringify({
+      success:false,
+      message : 'Error! Contanct administration'
+    }))
+  })
+}
 
 function insertUserIntoDatabase(req, res) {
   const user = new User();
